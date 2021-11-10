@@ -8,7 +8,7 @@ public class GraphCreator {
     public Graph createFromFile(InputStream fileStream) {
 // - on vas creer le fileStream dans le main
 // 1- lire le fichier pour creer le graphe
-// 2- lire le fichier line par line ( pour chaque ligne on aura une commande
+// 2- lire lgfdfdhfhfhfe fichier line par line ( pour chaque ligne on aura une commande
 // 3-creer le graphe à partir de la matrice
 // 4- retourner la matrice
 
