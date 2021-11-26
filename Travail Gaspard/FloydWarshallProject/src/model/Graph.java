@@ -1,6 +1,7 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -21,7 +22,7 @@ public class Graph {
     }
 
     public Graph(Graph graph) {
-        this(graph.getMatrix());
+        this(Arrays.stream(graph.getMatrix()).map(Link[]::clone).toArray(Link[][]::new));
     }
 
     public Link[][] getMatrix() {

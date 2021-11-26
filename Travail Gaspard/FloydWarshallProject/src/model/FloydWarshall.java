@@ -36,7 +36,6 @@ public abstract class FloydWarshall {
                 }
             }
         }
-        System.out.println(shorterPathGraph);
         return shorterPathGraph;
     }
 
