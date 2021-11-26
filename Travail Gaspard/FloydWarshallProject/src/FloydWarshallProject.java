@@ -9,7 +9,7 @@ import java.util.Scanner;
  * Main class in which to start and enroll the program by offering the user's input choices.
  */
 public class FloydWarshallProject {
-    private static final String[] GRAPHS_NAMES = {"test.txt", "test2.txt", "test3.txt", "test4.txt", "testAbsorbent.txt"};
+    private static final int GRAPH_AMOUNT = 18;
     private static final Scanner scanner = new Scanner(System.in);
 
     public static void main(String[] args) {
@@ -44,24 +44,21 @@ public class FloydWarshallProject {
         displayGraphChoices();
         String choice = scanner.nextLine();
         int nbChoice;
-        while (!choice.matches("\\d+") || (nbChoice = Integer.parseInt(choice)) <= 0 || nbChoice > (GRAPHS_NAMES.length + 1)) {
+        while (!choice.matches("\\d+") || (nbChoice = Integer.parseInt(choice)) <= 0 || nbChoice > (GRAPH_AMOUNT + 1)) {
             System.out.println("Invalid choice !\n\nPlease choose again :");
             displayGraphChoices();
             choice = scanner.nextLine();
         }
-        if (nbChoice == GRAPHS_NAMES.length + 1) throw new ExitException();
-        return GRAPHS_NAMES[nbChoice - 1];
+        if (nbChoice == GRAPH_AMOUNT + 1) throw new ExitException();
+        return "Graphe_".concat(String.valueOf(nbChoice).concat(".txt"));
     }
 
     /**
      * Displays the graph choices in the terminal
      */
     private static void displayGraphChoices() {
-        for (int i = 1; i <= GRAPHS_NAMES.length; i++) {
-            String[] splitName = GRAPHS_NAMES[i - 1].split("\\.");
-            String fileName = splitName[0] != null ? splitName[0] : GRAPHS_NAMES[i - 1];
-            System.out.println(i + ") " + fileName);
-        }
-        System.out.println((GRAPHS_NAMES.length + 1) + ") Exit");
+        for (int i = 1; i <= GRAPH_AMOUNT; i++)
+            System.out.println(i + ") Graphe " + i);
+        System.out.println((GRAPH_AMOUNT + 1) + ") Exit");
     }
 }
