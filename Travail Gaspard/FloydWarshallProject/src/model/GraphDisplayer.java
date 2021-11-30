@@ -9,9 +9,9 @@ public abstract class GraphDisplayer {
             for (int j = 0; j < graphSize; ++j)
                 if(graph.hasLink(i, j))
                     if(j != graphSize - 1)
-                        System.out.print(j + " -> " + i + " = " + graph.getValueAt(i, j) + "\t\t");
+                        System.out.print(i + " -> " + j + " = " + graph.getValueAt(i, j) + "\t\t");
                     else
-                        System.out.print(j + " -> " + i + " = " + graph.getValueAt(i, j));
+                        System.out.print(i + " -> " + j + " = " + graph.getValueAt(i, j));
             System.out.println();
         }
     }
