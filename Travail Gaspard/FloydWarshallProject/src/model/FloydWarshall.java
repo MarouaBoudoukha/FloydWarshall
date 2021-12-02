@@ -19,7 +19,7 @@ public abstract class FloydWarshall {
      * @throws IllegalArgumentException Whether or not there is an absorbent path in the graph
      */
     public static Graph calculateShorterPath(Graph graph) throws IllegalArgumentException, AbsorbentException {
-        if (hasAbsorbentPath(graph))
+        if (hasAbsorbingCircuit(graph,0))
             throw new AbsorbentException("Absorbent path");
         int graphSize = graph.getSize();
         Graph shorterPathGraph = new Graph(graph);
@@ -37,6 +37,58 @@ public abstract class FloydWarshall {
             }
         }
         return shorterPathGraph;
+    }
+
+    /**
+     * Executes Bellman-Ford algorithm on the input graph taking source as starting vertex
+     * Detects the presence or not of a negative-weight path in the graph
+     * @param graph Graph on which to carryout Bellman-Ford algorithm
+     * @param source starting vertex to engage relaxation of edges
+     * @return false if no negative-weight path found, true otherwise
+     */
+    private static boolean hasAbsorbingCircuit(Graph graph, int source){
+        int numberOfVertices = graph.getSize();
+        int numberOfEdges = graph.getEdges().size();
+        int dist[] = new int[numberOfVertices]; //distance from source
+
+        // Step 1: Initialize distances from src to all other
+        // vertices as INFINITE except distance of source set to 0
+        for(int i = 0; i < numberOfVertices; ++i){
+            dist[i] = Integer.MAX_VALUE;
+        }
+        dist[source] = 0;
+
+        // Step 2: Relax all edges |numberOfVertices| - 1 times. A simple
+        // shortest path from source to any other vertex can
+        // have at-most |numberOfVertices| - 1 edges
+        for(int i=1; i< numberOfVertices; ++i){
+            for(int j = 0; j < numberOfEdges; ++j){
+                int u  = graph.getEdges().get(j).getSource();
+                int v  = graph.getEdges().get(j).getDestination();
+                int weight  = graph.getEdges().get(j).getWeight();
+
+                if(dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v]){
+                    dist[v] = dist[u] + weight;
+                }
+            }
+        }
+
+        // Step 3: check for negative-weight cycles. The above
+        // step guarantees shortest distances if graph doesn't
+        // contain negative weight cycle. If we get a shorter
+        // path, then there is a cycle.
+        for(int j = 0; j < numberOfEdges; ++j){
+            int u  = graph.getEdges().get(j).getSource();
+            int v  = graph.getEdges().get(j).getDestination();
+            int weight  = graph.getEdges().get(j).getWeight();
+
+            if(dist[u] != Integer.MAX_VALUE && dist[u] + weight < dist[v]){
+                return true;
+            }
+        }
+
+        return false;
+
     }
 
     /**

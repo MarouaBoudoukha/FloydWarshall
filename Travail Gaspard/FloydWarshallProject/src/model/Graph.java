@@ -8,6 +8,7 @@ import java.util.List;
  * A Graph object to represent a certain graph by a two dimension value array according to the links between each summit.
  */
 public class Graph {
+    private List<Edge> edges;
     private Link[][] matrix;
     private final int size;
 
@@ -35,6 +36,14 @@ public class Graph {
 
     public int getSize() {
         return size;
+    }
+
+    public void setEdges(List<Edge> edges) {
+        this.edges = edges;
+    }
+
+    public List<Edge> getEdges() {
+        return edges;
     }
 
     /**
