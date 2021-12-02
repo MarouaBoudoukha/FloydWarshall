@@ -25,7 +25,7 @@ public class FloydWarshallProject {
                     System.out.println(shorterPath);
                     GraphDisplayer.displayShorterPaths(shorterPath);
                 } catch (AbsorbentException e) {
-                    System.err.println("Cannot calculate shorter paths because there is a absorbent path in the graph!");
+                    System.err.println("Cannot calculate shorter paths because there is an absorbent path in the graph!");
                 } catch (FileException e) {
                     System.err.println("Error reading file : \n" + e.getMessage());
                 }

@@ -37,9 +37,11 @@ public abstract class GraphCreator {
                     if (!line.matches("\\d+[\\s*-?\\d*]*") || (line.split("\\s+").length != 3))
                         throw new FileException("Line ".concat(String.valueOf(cpt + 1).concat(" doesn't match file pattern")));
                     String[] connections = line.split("\\s+");
-                    matrix[Integer.parseInt(connections[0])][Integer.parseInt(connections[1])] = new Link(Integer.parseInt(connections[2]));
-
-                    edges.add(new Edge(Integer.parseInt(connections[0]), Integer.parseInt(connections[1]), Integer.parseInt(connections[2])));
+                    int source = Integer.parseInt(connections[0]);
+                    int destination = Integer.parseInt(connections[1]);
+                    int weight = Integer.parseInt(connections[2]);
+                    matrix[source][destination] = new Link(weight);
+                    edges.add(new Edge(source, destination, weight));
                 }
                 ++cpt;
             }
