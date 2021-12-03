@@ -54,8 +54,6 @@ public class Graph {
      * @return Link's value
      */
     public int getValueAt(int x, int y) {
-        if (x < 0 || y < 0 || x >= size || y >= size)
-            throw new IllegalArgumentException("Incorrect index : " + x + "," + y);
         if (!hasLink(x, y))
             throw new IllegalArgumentException("No link for this index");
         return matrix[x][y].getValue();
@@ -82,9 +80,7 @@ public class Graph {
      * @param value New link value to set
      */
     public void setValueAt(int x, int y, int value) {
-        if (x < 0 || y < 0 || x >= size || y >= size)
-            throw new IllegalArgumentException("Incorrect index : " + x + "," + y);
-        if (matrix[x][y] == null)
+        if (!hasLink(x, y))
             matrix[x][y] = new Link(value);
         else matrix[x][y].setValue(value);
     }
@@ -101,15 +97,6 @@ public class Graph {
 
     @Override
     public String toString() {
-        return writeMatrix();
-    }
-
-    /**
-     * Creates a text representation of a graph by its matrix and the link values between the summits.
-     *
-     * @return Graph's text representation
-     */
-    private String writeMatrix() {
         String result = writeBeginning();
         for (int i = 0; i < size; i++) {
             if (i < 10)
@@ -131,7 +118,7 @@ public class Graph {
      * @return Matrix text beginning
      */
     private String writeBeginning() {
-        String result = "Matrix : \n  \t";
+        String result = "  \t";
         for (int i = 0; i < size; i++)
             result = result.concat(String.valueOf(i).concat("\t"));
         result = result.concat("\n  \t");

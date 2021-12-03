@@ -19,9 +19,11 @@ public class FloydWarshallProject {
             while ((graphName = graphChoiceScanner()) != null) {
                 try {
                     Graph graph = GraphCreator.createFromFile(FloydWarshallProject.class.getClassLoader().getResourceAsStream(graphName));
+                    System.out.println("Initial Matrix : ");
                     System.out.println(graph);
                     System.out.println("---------------Floyd Warshall-------------");
                     Graph shorterPath = FloydWarshall.calculateShorterPath(graph);
+                    System.out.println("Shorter Path Matrix : ");
                     System.out.println(shorterPath);
                     GraphDisplayer.displayShorterPaths(shorterPath);
                 } catch (AbsorbentException e) {
