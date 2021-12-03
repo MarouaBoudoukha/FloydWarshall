@@ -19,13 +19,15 @@ public class FloydWarshallProject {
             while ((graphName = graphChoiceScanner()) != null) {
                 try {
                     Graph graph = GraphCreator.createFromFile(FloydWarshallProject.class.getClassLoader().getResourceAsStream(graphName));
+                    System.out.println("Initial Matrix : ");
                     System.out.println(graph);
                     System.out.println("---------------Floyd Warshall-------------");
                     Graph shorterPath = FloydWarshall.calculateShorterPath(graph);
+                    System.out.println("Shorter Path Matrix : ");
                     System.out.println(shorterPath);
                     GraphDisplayer.displayShorterPaths(shorterPath);
                 } catch (AbsorbentException e) {
-                    System.err.println("Cannot calculate shorter paths because there is a absorbent path in the graph!");
+                    System.err.println("Cannot calculate shorter paths because there is an absorbent path in the graph!");
                 } catch (FileException e) {
                     System.err.println("Error reading file : \n" + e.getMessage());
                 }
